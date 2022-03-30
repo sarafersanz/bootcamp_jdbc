@@ -1,0 +1,66 @@
+package conection;
+
+import java.sql.DriverManager;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+
+/**
+ * Hello world!
+ *
+ */
+public class App 
+{
+    public static void main( String[] args )
+    {
+        
+    	// Conexión con ORACLE
+    	Conecction();
+    	
+    }
+    
+    private static void Conecction() {
+    	
+    	// Datos de la conexión
+    	String user = "usuario";
+    	String password = "clave";
+    	
+    	try {
+    		
+    		// Driver de la conexión
+    		Class.forName("oracle.jdbc.driver.OracleDriver");
+    		
+    		// Conectar
+    		final Connection dbConnection = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE", user, password);
+    		
+    		// Consulta
+    		final Statement sentence = dbConnection.createStatement();
+    		final String query = "SELECT * usuarios";;
+    		final ResultSet queryResult = sentence.executeQuery(query);
+    		
+    		// Tratar los datos
+    		StringBuilder user1 = new StringBuilder();
+    		while(queryResult.next()) {
+    			user1.append("Nombre: ");
+    			user1.append(queryResult.getString("username"));
+    			user1.append( "\n" );
+    		}
+    		
+    		// Mostrar los datos
+    		System.out.println( user1.toString() );
+    		
+    		// Cerrar conexión
+    		dbConnection.close();
+    		
+    	// En caso de excepción
+    	} catch (ClassNotFoundException | SQLException e) {
+    		
+    		// Mostrar por consola
+    		System.out.println( "Error en la conexión con la BD" );
+    		
+    	}
+    }
+}

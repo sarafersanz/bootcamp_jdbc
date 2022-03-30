@@ -1,0 +1,5 @@
+INDEX VERSION 1.131+C:\bootcamp\maven_git\curso_jdbc\.metadata\.plugins\org.eclipse.jdt.core
+3882093782.index
+1865797976.index
+2334001486.index
+1603948278.index
